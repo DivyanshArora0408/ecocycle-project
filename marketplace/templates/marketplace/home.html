@@ -1,0 +1,118 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoCycle | Give E-Waste a New Life</title>
+    <link rel="stylesheet" href="{% static 'marketplace/style.css' %}">
+</head>
+<body>
+
+<header class="navbar">
+    <a href="/" class="logo">♻ Eco<span>Cycle</span></a>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="#how">How It Works</a>
+        <a href="#impact">Our Impact</a>
+    </nav>
+
+    <div class="nav-actions">
+        <a href="/login/" class="login">Login</a>
+        <a href="/register/" class="nav-button">Get Started ↗</a>
+        <a href="{% url 'profile' %}">My Profile</a>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-content">
+            <p class="eyebrow">♻ A SMARTER WAY TO RECYCLE</p>
+
+            <h1>Give E-Waste<br>a <span>New Life.</span></h1>
+
+            <p class="description">
+                Your old electronics deserve a better future.
+                Schedule a pickup, connect with certified recyclers
+                and make every device count.
+            </p>
+
+            <div class="hero-actions">
+                <a href="/login/" class="primary-button">
+                    Schedule a Pickup &nbsp; →
+                </a>
+                <a href="#how" class="secondary-button">
+                    Discover How
+                </a>
+            </div>
+
+            <div class="trust">
+                <span>✓ Certified recyclers</span>
+                <span>✓ Responsible disposal</span>
+            </div>
+        </div>
+
+        <div class="floating-note">
+            <span class="leaf">♻</span>
+            <div>
+                <strong>Recycle today</strong>
+                <p>Protect tomorrow.</p>
+            </div>
+        </div>
+
+        <div class="hero-bottom" id="impact">
+            <article class="info-card pickup-card">
+                <span class="card-icon">⌖</span>
+                <p class="card-label">E-WASTE PICKUP</p>
+                <h3>Right at your doorstep.</h3>
+                <p>Book a convenient pickup from your home.</p>
+                <a href="/login/">Book a pickup ↗</a>
+            </article>
+
+            <article class="info-card">
+                <p class="card-label">OUR MISSION</p>
+                <h3>Less waste.<br>More future.</h3>
+                <p>Connect people with responsible recyclers.</p>
+            </article>
+
+            <article class="info-card">
+                <p class="card-label">RECYCLE SMARTER</p>
+                <h3>Every device<br>makes a difference.</h3>
+                <p>Track your recycling journey and get a digital certificate.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="how" id="how">
+        <p class="eyebrow">SIMPLE. RESPONSIBLE. ECO-FRIENDLY.</p>
+        <h2>Three steps to a greener future.</h2>
+
+        <div class="steps">
+            <article>
+                <span>01</span>
+                <h3>Submit your e-waste</h3>
+                <p>Tell us what electronic items you want to recycle.</p>
+            </article>
+            <article>
+                <span>02</span>
+                <h3>Schedule a pickup</h3>
+                <p>Choose your pickup address and preferred time slot.</p>
+            </article>
+            <article>
+                <span>03</span>
+                <h3>Recycle responsibly</h3>
+                <p>Track the process and receive your disposal certificate.</p>
+            </article>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <a href="/" class="logo">♻ Eco<span>Cycle</span></a>
+    <p>Small actions. A cleaner planet.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule E-Waste Pickup | EcoCycle</title>
+    <link rel="stylesheet" href="{% static 'marketplace/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Schedule E-Waste Pickup</h1>
+        <p>Fill in the details to arrange your e-waste collection.</p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit">Schedule Pickup</button>
+        </form>
+
+        <p><a href="{% url 'dashboard' %}">Back to Dashboard</a></p>
+    </div>
+</body>
+</html>

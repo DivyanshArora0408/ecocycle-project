@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | EcoCycle</title>
+</head>
+
+<body style="font-family:Arial; background:#f4f6ef; padding:40px;">
+
+    <div style="max-width:800px; margin:auto; background:white;
+                padding:35px; border-radius:16px;">
+
+        <h1 style="color:#286b38;">♻ EcoCycle Dashboard</h1>
+
+        <h2>Welcome, {{ request.user.email }}</h2>
+        <p>Manage your e-waste pickups from here.</p>
+
+        <hr>
+
+        <h2>Quick Actions</h2>
+
+        <!-- Schedule Pickup -->
+        <p>
+            <a href="{% url 'create_pickup' %}"
+               style="display:inline-block; background:#286b38; color:white;
+                      padding:12px 20px; text-decoration:none;
+                      border-radius:8px;">
+                + Schedule Pickup
+            </a>
+        </p>
+
+        <!-- My Pickups -->
+        <p>
+            <a href="{% url 'my_pickups' %}"
+               style="display:inline-block; background:#e6f1e7; color:#286b38;
+                      padding:12px 20px; text-decoration:none;
+                      border-radius:8px;">
+                📦 My Pickups / Order History
+            </a>
+        </p>
+
+        <!-- Profile -->
+        <p>
+            <a href="{% url 'profile' %}"
+               style="display:inline-block; background:#e6f1e7; color:#286b38;
+                      padding:12px 20px; text-decoration:none;
+                      border-radius:8px;">
+                👤 My Profile
+            </a>
+        </p>
+
+        <!-- Admin Panel: visible only to staff/admin users -->
+        {% if request.user.is_staff %}
+        <p>
+            <a href="/admin/"
+               style="display:inline-block; background:#286b38; color:white;
+                      padding:12px 20px; text-decoration:none;
+                      border-radius:8px;">
+                ⚙ Admin Panel
+            </a>
+        </p>
+        {% endif %}
+
+        <hr>
+
+        <!-- Logout -->
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit"
+                    style="background:#b83232; color:white; border:none;
+                           padding:10px 20px; border-radius:8px;
+                           cursor:pointer;">
+                Logout
+            </button>
+        </form>
+
+        <p>
+            <a href="{% url 'home' %}" style="color:#286b38;">
+                ← Back to Home
+            </a>
+        </p>
+
+    </div>
+
+</body>
+</html>

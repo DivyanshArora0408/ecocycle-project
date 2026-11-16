@@ -1,0 +1,58 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | EcoCycle</title>
+    <link rel="stylesheet" href="{% static 'marketplace/style.css' %}">
+    <style>
+        .auth-wrap { max-width: 460px; margin: 65px auto; padding: 32px; background: white; border-radius: 18px; box-shadow: 0 8px 35px #20332412; }
+        .auth-wrap h1 { font-size: 32px; letter-spacing: -1px; color: #263d2a; }
+        .auth-wrap p { color: #667064; margin: 12px 0 22px; }
+        .auth-wrap label { display: block; margin: 16px 0 7px; font-size: 14px; font-weight: 600; }
+        .auth-wrap input { width: 100%; padding: 12px; border: 1px solid #d8e0d5; border-radius: 9px; }
+        .auth-wrap button { width: 100%; margin-top: 22px; padding: 14px; border: 0; border-radius: 25px; background: #29462e; color: white; cursor: pointer; }
+        .auth-wrap .errorlist { color: #bd3030; font-size: 13px; }
+        .auth-wrap .messages { color: #bd3030; }
+        .auth-wrap .bottom { text-align: center; font-size: 14px; margin-top: 20px; }
+        .auth-wrap a { color: #378340; }
+    </style>
+</head>
+<body>
+    <div class="auth-wrap">
+        <a class="logo" href="/">♻ Eco<span>Cycle</span></a>
+        <h1 style="margin-top: 28px;">Create your account</h1>
+        <p>Join us to recycle e-waste responsibly.</p>
+
+        {% for message in messages %}
+            <p class="messages">{{ message }}</p>
+        {% endfor %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            <label for="{{ form.email.id_for_label }}">Gmail address</label>
+            {{ form.email }}
+            {{ form.email.errors }}
+
+            <label for="{{ form.password1.id_for_label }}">Password</label>
+            {{ form.password1 }}
+            {{ form.password1.errors }}
+
+            <label for="{{ form.password2.id_for_label }}">Confirm password</label>
+            {{ form.password2 }}
+            {{ form.password2.errors }}
+
+            <button type="submit">Create Account</button>
+        </form>
+
+        <div class="bottom">
+            Already registered? <a href="{% url 'login' %}">Login</a>
+        </div>
+    </div>
+</body>
+</html>

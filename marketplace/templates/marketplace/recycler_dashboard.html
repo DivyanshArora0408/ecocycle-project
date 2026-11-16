@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recycler Dashboard - EcoCycle</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f6f3;
+            margin: 0;
+            padding: 25px;
+        }
+
+        h1 {
+            color: #176b45;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 750px;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #176b45;
+            color: white;
+        }
+
+        select, button {
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        select {
+            border: 1px solid #ccc;
+            background: white;
+        }
+
+        button {
+            background: #176b45;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #105536;
+        }
+
+        a {
+            color: #176b45;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>EcoCycle - Recycler Dashboard</h1>
+    <p>View and manage e-waste pickup requests.</p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Address</th>
+                    <th>Pickup Date</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for pickup in pickups %}
+                <tr>
+                    <td>{{ pickup.id }}</td>
+                    <td>{{ pickup.user.username }}</td>
+                    <td>{{ pickup.category }}</td>
+                    <td>{{ pickup.quantity }}</td>
+                    <td>{{ pickup.address }}</td>
+                    <td>{{ pickup.pickup_date }}</td>
+                    <td>{{ pickup.status }}</td>
+
+                    <td>
+                        <form method="post">
+                            {% csrf_token %}
+
+                            <input type="hidden"
+                                   name="pickup_id"
+                                   value="{{ pickup.id }}">
+
+                            <select name="status" required>
+                                <option value="Pending"
+                                    {% if pickup.status == "Pending" %}selected{% endif %}>
+                                    Pending
+                                </option>
+
+                                <option value="Processing"
+                                    {% if pickup.status == "Processing" %}selected{% endif %}>
+                                    Processing
+                                </option>
+
+                                <option value="Completed"
+                                    {% if pickup.status == "Completed" %}selected{% endif %}>
+                                    Completed
+                                </option>
+                            </select>
+
+                            <button type="submit">Update</button>
+                        </form>
+                    </td>
+                </tr>
+
+                {% empty %}
+                <tr>
+                    <td colspan="8">No pickup requests found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <p>
+        <a href="{% url 'dashboard' %}">Back to User Dashboard</a>
+    </p>
+
+</body>
+</html>

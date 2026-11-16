@@ -1,0 +1,53 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Pickups | EcoCycle</title>
+    <link rel="stylesheet" href="{% static 'marketplace/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>My Pickups</h1>
+        <p>View all your scheduled e-waste pickups here.</p>
+
+        {% if pickups %}
+            {% for pickup in pickups %}
+                <div class="pickup-card">
+                    <h2>{{ pickup.category }}</h2>
+
+                    <p><strong>Quantity:</strong> {{ pickup.quantity }}</p>
+                    <p><strong>Condition:</strong> {{ pickup.condition }}</p>
+                    <p><strong>Pickup Address:</strong> {{ pickup.address }}</p>
+                    <p><strong>Pickup Date:</strong> {{ pickup.pickup_date }}</p>
+                    <p><strong>Time Slot:</strong> {{ pickup.time_slot }}</p>
+                    <p><strong>Status:</strong> {{ pickup.status }}</p>
+
+                    {% if pickup.image %}
+                        <img src="{{ pickup.image.url }}"
+                             alt="E-waste image" width="150">
+                    {% endif %}
+
+                    {% if pickup.status == "Completed" %}
+                        <p>
+                            <a href="{% url 'download_certificate' pickup.id %}">
+                                Download Disposal Certificate (PDF)
+                            </a>
+                        </p>
+                    {% endif %}
+                </div>
+                <hr>
+            {% endfor %}
+        {% else %}
+            <p>You have not scheduled any pickups yet.</p>
+            <a href="{% url 'create_pickup' %}">
+                Schedule Your First Pickup
+            </a>
+        {% endif %}
+
+        <p><a href="{% url 'dashboard' %}">Back to Dashboard</a></p>
+    </div>
+</body>
+</html>

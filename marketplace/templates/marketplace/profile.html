@@ -1,0 +1,99 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | EcoCycle</title>
+    <link rel="stylesheet" href="{% static 'marketplace/style.css' %}">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6ef;
+            color: #263d2a;
+        }
+        .profile-card {
+            max-width: 650px;
+            margin: 60px auto;
+            padding: 35px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px #20332412;
+        }
+        .avatar {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            background: #d6f3c8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+        .detail {
+            padding: 15px 0;
+            border-bottom: 1px solid #e5e9e2;
+        }
+        .detail strong {
+            display: block;
+            margin-bottom: 7px;
+            color: #718071;
+            font-size: 13px;
+        }
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+        .actions a, .actions button {
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 0;
+            background: #29462e;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .actions .home {
+            background: #e5efdf;
+            color: #29462e;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-card">
+        <div class="avatar">♻</div>
+
+        <h1>My Profile</h1>
+        <p>Welcome to your EcoCycle account.</p>
+
+        <div class="detail">
+            <strong>USERNAME</strong>
+            {{ request.user.username }}
+        </div>
+
+        <div class="detail">
+            <strong>GMAIL ADDRESS</strong>
+            {{ request.user.email }}
+        </div>
+
+        <div class="detail">
+            <strong>ACCOUNT STATUS</strong>
+            Active
+        </div>
+
+        <div class="actions">
+            <a class="home" href="/">Home</a>
+
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
